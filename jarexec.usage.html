@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+<title>jarexec usage | lingocoder</title>
+</head>
+<body>
+<table width="100%" cellpadding="0" cellspacing="0">
+<tr  valign="bottom" align="right"><td rowspan="3" width="88" height="120"  align="right"  valign="bottom"><img src="lingo.workshop.cover.1e.png" alt="lingocoder" width="88" height="120"  valign="bottom" hspace="0" border="0" vspace="0"></td></tr>
+<tr align="left" valign="top"><td  bgcolor="white" height="94" align="middle" valign="middle"> <span style="font-size: 80">lingocoder</span></tr>
+<!--<tr align="left" valign="top"><td height="9" align="left" valign="top"><img src="red.row.a.png" alt="redrow" width="1" height="120"  valign="bottom" hspace="0" border="0" vspace="0"></td></tr>-->
+<tr align="left" valign="top"   bgcolor="#E60D16" ><td  bgcolor="#E60D16" height="8" align="left" valign="top"></td></tr>
+</table>
+<br />
+<br />
+<table summary="jarexec.usage" border="0">
+<tr valign="top">
+<td><img src="jarexec.1.png" alt="jarexec" /></td><td rowspan="3" valign="top">  
+<span style="font-size: 20; font-family: Verdana"><strong>JarExec</strong></span><br />
+<span style="font-size: 20; font-family: Verdana">A Gradle plugin that executes Java Jar files.</span><br /><br />
+<span  style="font-size: 20">&nbsp;&nbsp;Usage:&nbsp;&nbsp;</span><br /><br />
+<pre>
+    /* (1) Apply the jarexec plugin using the plugins DSL. */
+    plugins{
+        id 'com.lingocoder.jarexec' version '0.1'
+    }
+		
+    /* (2) Configure repositories. jcenter is preferred by Gradle.org. */
+    repositories {jcenter()}
+
+    dependencies {
+        /* Declare your api|implementation|testImplementation dependencies like you normally would. */
+        api 'com.example:foo:0.0.0'
+
+        /* (3) Declare a dependency on the executable jar that jarexec's :execjar task will execute. */
+        runtimeOnly 'org.raml.jaxrs:raml-to-jaxrs-cli:3.0.5:jar-with-dependencies'
+    }
+
+    jarexec{
+        /* (4) This example's input file. */
+        def raml = file("src/main/resources/api.raml")
+ 
+        /* (5) This example's output directory. */
+        def jaxrs = file("$buildDir/generated/jaxrs")
+
+        /* (6) Fetch your executable from the dependency cache */
+        def jaxrsCli = jarhelper.fetch("org.raml.jaxrs:raml-to-jaxrs-cli:3.0.5:jar-with-dependencies").orElse(raml)
+
+        /* (7) Optionally, confirm that your fetched jar is executable. */
+        assert jarhelper.checkExecutable(jaxrsCli);
+
+        /* (8) Configure jarexec's 'args' property with your list of arguments. */
+        args = ["-r", "lingocoder", "-d", jaxrs.absolutePath, raml.absolutePath]
+
+        /* (9) Configure jarexec's 'jar' property with your executable jar. */
+        jar = jaxrsCli
+
+        /* (10) Configure jarexec's 'watchInFile' property with your input file. */
+        watchInFile = raml
+
+        /* (11) Configure jarexec's 'watchOutDir' property with your output directory. */
+        watchOutDir = jaxrs
+    }
+</pre>
+<span  style="font-size: 20">&nbsp;&nbsp;From the command line, run:&nbsp;&nbsp;</span><br /><br />
+
+<pre>    $ gradle --build-cache execjar</pre>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+</table>
+</body>
+</html>
