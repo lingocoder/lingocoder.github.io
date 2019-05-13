@@ -1,3 +1,3 @@
 # lingocoder.github.io
 
-v0.1
+v0.2
