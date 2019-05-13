@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.lingocoder.common"},{"l":"com.lingocoder.file"},{"l":"com.lingocoder.io"},{"l":"com.lingocoder.jar"},{"l":"com.lingocoder.plugin.jarexec"},{"l":"com.lingocoder.process"},{"l":"com.lingocoder.process.io"},{"l":"com.nostacktrace.norman.richards"}]
