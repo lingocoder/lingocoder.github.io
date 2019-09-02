@@ -6,7 +6,7 @@
 </head>
 <body>
 <table width="100%" cellpadding="0" cellspacing="0">
-<tr  valign="bottom" align="right"><td rowspan="3" width="88" height="120"  align="right"  valign="bottom"><img src="lingocoder.logo.png" alt="lingocoder" width="88" height="120"  valign="bottom" hspace="0" border="0" vspace="0"></td></tr>
+<tr  valign="bottom" align="right"><td rowspan="3" width="88" height="120"  align="right"  valign="bottom"><a href="http://lingocoder.com/mrjar" title="lingocoder&nbsp;&mdash;&nbsp;mrjar" target="_self"><img src="lingocoder.logo.png" alt="lingocoder" width="88" height="120"  valign="bottom" hspace="0" border="0" vspace="0"></a></td></tr>
 <tr align="left" valign="top"><td  bgcolor="white" height="94" align="middle" valign="middle"> <span style="font-size: 80">lingocoder</span></tr>
 <!--<tr align="left" valign="top"><td height="9" align="left" valign="top"><img src="red.row.a.png" alt="redrow" width="1" height="120"  valign="bottom" hspace="0" border="0" vspace="0"></td></tr>-->
 <tr align="left" valign="top"   bgcolor="#E60D16" ><td  bgcolor="#E60D16" height="8" align="left" valign="top"></td></tr>
@@ -15,7 +15,7 @@
 <br />
 <table summary="mrJar.usage" border="0">
 <tr valign="top">
-<td><img src="jarexec.1.png" alt="mrJar" /></td><td rowspan="3" valign="top">  
+<td><a href="http://bit.ly/mrJar" title="The mrjar plugin on Gradle's Community Plugins Portal"><img src="jarexec.1.png" alt="mrjar" /></a></td><td rowspan="3" valign="top">
 <span style="font-size: 20; font-family: Verdana"><strong>mrJar</strong></span><br />
 <span style="font-size: 20; font-family: Verdana">Modular MRJAR Files Made Easy</span><br /><br />
 <span  style="font-size: 20">&nbsp;&nbsp;Usage:&nbsp;&nbsp;</span><br /><br />
@@ -58,27 +58,35 @@
 <pre>    $ ./gradlew :mrinit</pre>
 
 <table width="70%">
-        <tr><td><span  style="font-size: 20">&nbsp;What <code><em>:mrinit</em></code> gets you is a source directory hierarchy for each release you specified. So for the above example, folders at <code><em>src/main/java11</em></code> and  <code><em>src/main/java12</em></code> will have been created. After that initial setup, you will, of course, need to populate the source directories with the source code for each respective release to be supported by your MRJAR. And also, optionally, any <em><code>module-info.java</code></em> files you might <em>optionally</em> need; if you're going the modular library route &mdash; a single-release module that is just one single library per jar file is not an uncommon use case.&nbsp;&nbsp;</span><br /><br /></td></tr>
+        <tr><td><span  style="font-size: 20">&nbsp;What <code><em>:mrinit</em></code> gets you is a source directory hierarchy for each release you specified. So for the above example, folders at <code><em>src/main/java11</em></code> and  <code><em>src/main/java12</em></code> will have been created. After that initial setup, you will, of course, need to populate the source directories with the source code for each respective release to be supported by your MRJAR. And also, optionally, any <em><code>module-info.java</code></em> files you might <em>optionally</em> need; if you're going the modular jar<a href="#modular_jar_vs_multi_release_jar" title="An important distinction to remember"><em><sup>1</sup></em></a> route &mdash; <em><a href="http://bit.ly/SnglRelJar" title="JEP 261: Module System&mdash;Packaging: Modular JAR files" target="_blank">a single-release module that is just one single library per jar file</a></em> is not an uncommon use case.&nbsp;&nbsp;</span><br /><br /></td></tr>
         
         <tr><td></td></tr>
         
         <tr><td><span  style="font-size: 20">&nbsp;After you have all your release source folders, your packages hierarchy, and naturally, your actual source code in place, that's pretty much it. The <code><em>:mrinit</em></code> task is more or less a one-time deal; just to initialize your releases in preparation for their eventual bundling into the artifact your project will ultimately produce. After you run <code><em>:mrinit</em></code> the one time, you then simply proceed with your typical test/develop/build cycle exactly as you ordinarily would. Then, when you want to publish the artifacts of your project, you do that too exactly like you normally would. Nothing different:</span><br /><br />
         
             <pre>    $ ./gradlew :publish</pre>
-        </td></tr></td></tr>
+        </td></tr><!--</td></tr>-->
         
         <tr><td></td></tr>
         
-        <tr><td><span  style="font-size: 20">&nbsp;So for example, the <strong><em>mrJar</em></strong> plugin uses itself to build itself as a modular MRJAR File. As I developed the plugin, I did the steps outlined above. Because I used Gradle's <em>Java Plugin Development Plugin</em>, I ran the <code><em>:publish</em></code> task often. The output of that built-in task was my plugin's jar as a modular MRJAR File. Which I used during development on the plugin itself (<em>dog-fooding</em>). Likewise, when I published the plugin to Gradle's Plugin Portal. In that use case, you just use the <em>Plugin Publishing Plugin</em> as usual:</span><br /><br />
+        <tr><td><span  style="font-size: 20">&nbsp;So for example, the <strong><em>mrJar</em></strong> plugin uses itself to build itself as a modular MRJAR File. As I developed the plugin, I did the steps outlined above. Because I used Gradle's <em>Java Plugin Development Plugin</em>, I ran the <code><em>:publish</em></code> task often. The output of that built-in task was my plugin's jar as a modular MRJAR File. Which I used during development on the plugin itself (<em>dog-fooding</em>). Likewise, when I published the plugin to Gradle's Plugin Portal. In that use case, you just use the <em><a href="http://bit.ly/PlgNHow2" title="Step 4: Use the plugin publishing plugin" target="_blank">Plugin Publishing Plugin</a></em> as usual:</span><br /><br />
         
             <pre>    $ ./gradlew :publishPlugin</pre>
         </td></tr>
         
-        <tr><td><span  style="font-size: 20">&nbsp;In the presense of any plugin that relies on Gradle's built-in <code><em>:jar</em></code> task, <em><strong>mrJar</strong></em> in the mix enhances <code><em>:jar</em></code> to be MRJAR-capable. <strong><em>mrJar</em></strong> itself, however, does not provide a specific task that must be explictly executed to create a module or an MRJAR.</span></td></tr>
+        <tr><td><span  style="font-size: 20">&nbsp;In the presense of any plugin that relies on Gradle's built-in <code><em>:jar</em></code> task, <em><strong>mrJar</strong></em> in the mix enhances <code><em>:jar</em></code> to be MRJAR-capable. <strong><em>mrJar</em></strong> itself, however, does not provide a specific task that must be explictly executed to create a module or an MRJAR.</span><br /><br /></td></tr>
 
-    </td></tr></td></tr>
+        <tr><td></td></tr>
+
     
-        
+       <tr><td><span  style="font-size: 20">&nbsp;Any and all questions or suggestions are welcomed. Please do not hesitate to <em><a href="http://bit.ly/LogIn2MsgMe" title="Get in Touch!">message me</a></em> with anything. I'd be thrilled to hear from you.</span><br /><br /></td></tr>
+
+       <tr><td>__________</td></tr>
+
+       <tr><td><span  style="font-size: 15"><a name="modular_jar_vs_multi_release_jar"><sup>1</sup><em>It's important to bear in mind that <a href="http://bit.ly/SnglRelJar" title="JEP 261: Module System&mdash;Packaging: Modular JAR files" target="_blank">Modular Jars</a> are distinct from <a href="http://bit.ly/JEP238" title="JEP 238: Multi-Release JAR Files" target="_blank">Multi-Release Jars</a>. They are related. But they are not the same. You can have one, and it will not neccessarily mean you also have the other.</em></a></span></td></tr>
+
+       <tr><td>&nbsp;</td></tr>
+            
     </table>
     </td>
 </td>
