@@ -20,12 +20,15 @@
 <span style="font-size: 20; font-family: Verdana">Modular MRJAR Files Made Easy</span><br /><br />
 <span  style="font-size: 20">&nbsp;&nbsp;Usage:&nbsp;&nbsp;</span><br /><br />
 <pre>
-    /* (1) Apply the mrjar plugin using the plugins DSL. */
+    /* (1) Set two environment variables. One named JAVA_8 and the other named JAVA_9.             */
+    /*     &bull; They must refer to the file system installations of JDK version 8 and 9 respectively. */
+
+    /* (2) Apply the mrjar plugin using the plugins DSL. */
     plugins{
-        id 'com.lingocoder.mrjar' version '0.0.1'
+        id 'com.lingocoder.mrjar' version '0.0.3'
     }
 		
-    /* (2) Configure repositories. jcenter is preferred by Gradle.org. */
+    /* (3) Configure repositories. jcenter is preferred by Gradle.org. */
     repositories {jcenter()}
 
     dependencies {
@@ -36,21 +39,28 @@
     }
 
     mrjar {
-        /* (3) Tell mrjar which releases you want your MRJAR File to support                  */
+        /* (4) Tell mrjar which releases you want your MRJAR File to support                  */
         /*     &bull; this property is mandatory. The values must be Gradle's version enum types   */
         releases = [JavaVersion.VERSION_12, JavaVersion_11]
  
-        /* (4) Optionally, you can tell mrjar to create the packages you need                 */
+        /* (5) Optionally, you can tell mrjar to create the packages you need                 */
         /*     &bull; each package in the list will be created in each release src directory       */
         packages = ['org.example.foo', 'io.another.one',...]
 
-        /* (5) Optionally, tell mrjar you want a modular MRJAR                                */
+        /* (6) Optionally, tell mrjar you want a modular MRJAR                                */
         /*     &bull; or just the existence of a module-info.java file has the same effect         */
         isModular = true (or false)
 
-        /* (6) Optionally, tell mrjar to use a specific name for your module.                 */
+        /* (7) Optionally, tell mrjar to use a specific name for your module.                 */
         /*     &bull; by default, mrJar uses the project name and version                          */
         moduleName = 'foo.bar'
+
+        /* (8) Optionally &mdash; or, mandatorily if you're using Gradle's Application              */
+        /*     Plugin to execute a Java application bundled in your module &mdash; tell             */
+        /*     mrjar the binary name of the class you want the Application Plugin to run      */
+        /*     &bull; the value of this property will automatically propagate to the               */
+        /*       Application Plugin's :run task                                               */
+        main = 'com.acme.main.JavaMain'
     }
 </pre>
 <span  style="font-size: 20">&nbsp;&nbsp;From the command line, run:&nbsp;&nbsp;</span><br /><br />
