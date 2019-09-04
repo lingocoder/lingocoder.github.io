@@ -18,6 +18,7 @@
 <td><a href="http://bit.ly/mrJar" title="The mrjar plugin on Gradle's Community Plugins Portal"><img src="jarexec.1.png" alt="mrjar" /></a></td><td rowspan="3" valign="top">
 <span style="font-size: 20; font-family: Verdana"><strong>mrJar</strong></span><br />
 <span style="font-size: 20; font-family: Verdana">Modular MRJAR Files Made Easy</span><br /><br />
+<span  style="font-size: 20; color: #E60D16">&nbsp;&nbsp;<em>Due to a breaking change in Gradle 5.6.1, current versions of</em> <strong><em>mrJar</em></strong> <em>are confirmed to work only with Gradle versions 5.0.0 to 5.5.1</em>&nbsp;&nbsp;</span><br /><br />
 <span  style="font-size: 20">&nbsp;&nbsp;Usage:&nbsp;&nbsp;</span><br /><br />
 <pre>
     /* (1) Set two environment variables. One named JAVA_8 and the other named JAVA_9.             */
@@ -25,7 +26,7 @@
 
     /* (2) Apply the mrjar plugin using the plugins DSL. */
     plugins{
-        id 'com.lingocoder.mrjar' version '0.0.3'
+        id 'com.lingocoder.mrjar' version '0.0.5'
     }
 		
     /* (3) Configure repositories. jcenter is preferred by Gradle.org. */
