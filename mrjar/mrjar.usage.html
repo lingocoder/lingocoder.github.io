@@ -21,10 +21,16 @@
 <span  style="font-size: 20; color: #E60D16">&nbsp;&nbsp;<em>Due to a breaking change in Gradle 5.6.1, current versions of</em> <strong><em>mrJar</em></strong> <em>are confirmed to work only with Gradle versions 5.0.0 to 5.5.1</em>&nbsp;&nbsp;</span><br /><br />
 <span  style="font-size: 20">&nbsp;&nbsp;Usage:&nbsp;&nbsp;</span><br /><br />
 <pre>
-    /* (1) Set two environment variables. One named JAVA_8 and the other named JAVA_9.             */
-    /*     &bull; They must refer to the file system installations of JDK version 8 and 9 respectively. */
-
-    /* (2) Apply the mrjar plugin using the plugins DSL. */
+    /* (1) Decide which type of module artifact your project needs to produce and proceed accordingly         */
+    /*                                                                                                        */
+    /*     (a) A Single-Release Jar File that targets a single JDK release and packages a single module       */
+    /*         &bull; DO NOT set any JDK release environment variables. Proceed to (2)                             */
+    /*                                                                                                        */
+    /*     (b) A Multi-Release Jar File that targets two or more Java 9+ releases.                            */
+    /*         &bull; Set two environment variables. One named JAVA_8 and the other named JAVA_9.                  */
+    /*           They must refer to the file system installations of JDK version 8 and 9 respectively.        */
+    /*                                                                                                        */
+    /* (2) Apply the mrjar plugin using the plugins DSL.                                                      */
     plugins{
         id 'com.lingocoder.mrjar' version '0.0.5'
     }
