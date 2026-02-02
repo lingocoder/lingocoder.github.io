@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+        <style>
+
+    /* Add the @font-face rule here, at the very beginning of your style block */
+    @font-face {
+        font-family: 'Bebas Neue';
+        src: url('/assets/BebasNeue-webfont-BwQvuGci.eot');
+        src: url('/assets/BebasNeue-webfont-BwQvuGci.eot#iefix') format('embedded-opentype'),
+             url('/assets/BebasNeue-webfont-BTkmt9Pp.woff') format('woff'),
+             url('/assets/BebasNeue-webfont-PPXsPAF6.ttf') format('truetype'),
+             url('/assets/BebasNeue-webfont-DQQcRZxK.svg#BebasNeue') format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+.header {
+    font-family: 'Bebas Neue',Arial,Helvetica,sans-serif;
+    background: #222;
+    background: -webkit-linear-gradient(top,#333 0%,#000 100%);
+    background: linear-gradient(to bottom,#333 0%,#000 100%);
+    height: 60px;
+    border-bottom: 1px solid #222;
+    box-shadow: 0 5px 10px #111;
+    position: relative; /* Keep relative for any absolutely positioned children if needed */
+    z-index: 2;
+    padding: 10px 0; /* Keep padding for vertical spacing if desired */
+
+    /* --- NEW/MODIFIED FLEXBOX PROPERTIES FOR THE HEADER --- */
+    display: flex; /* Make .header a flex container */
+    align-items: center; /* Vertically center its direct children (logo and button) */
+    justify-content: space-between; /* Pushes the first item (logo) to the start and the last item (button) to the end */
+}
+
+.header .logo {
+    /* Keep existing flex, padding, font, color, etc. */
+    display: flex;
+    align-items: center;
+    /* CHANGE: Add padding-left here */
+    padding-left: 125px; /* Adjust this value as needed based on the hero logo's width */
+    white-space: nowrap;
+    font-family: 'Bebas Neue',Arial,Helvetica,sans-serif;
+    color: #fff;
+    font-size: 20px;
+
+    /* CRITICAL: Ensure this is present and correct */
+    position: relative; /* Make the logo element a positioning context for its children */
+    flex-shrink: 0; /* Prevent logo from shrinking to ensure space-between works */
+    flex-basis: auto; /* Ensure logo takes its natural width */
+
+    /* Ensure a.logo matches the header's height, or its content aligns properly */
+    height: 60px; /* Explicitly set height to match the header, overriding 100% if needed */
+    line-height: 60px; /* This helps vertically align the text content "Marinara Timer by" */
+}
+
+.header .logo:before {
+    content: '';
+    /* REMOVE display: block; -- it's not needed for absolutely positioned elements in this context */
+
+    background: transparent url(https://web.archive.org/web/20170104231649im_/http://www.marinaratimer.com/Content/img/logo.png) no-repeat 0 0;
+    width: 148px;
+    height: 156px; /* Intrinsic height */
+
+    /* Keep the scaling transform */
+    -webkit-transform: scale(-.6,.6);
+    -ms-transform: scale(-.6,.6);
+    transform: scale(-.7,.7);
+
+    -webkit-transform-origin: 40% 0; /* Scaling origin remains top-center */
+    -ms-transform-origin: 40% 0;
+    transform-origin: 40% 0;
+
+    /* CRITICAL: Correct absolute positioning */
+    position: absolute;
+    top: 1.0px; /* This calculation should position the top of the logo 15.5px ABOVE the top of a.logo */
+    left: 16.0px; /* Align left with the start of a.logo */
+
+    /* REMOVE THIS: margin-right: 10px; as it's absolutely positioned */
+}
+
+.header .logo:after {
+    content: '';
+    display: block; /* Keep as display: block so it respects width/height within flex container */
+    background: transparent url(https://web.archive.org/web/20170104231649im_/http://www.marinaratimer.com/Content/img/logo-tiny.png) no-repeat 0 0;
+    width: 118px;
+    height: 54px;
+    -webkit-transform: scale(.5);
+    -ms-transform: scale(.5);
+    transform: scale(.5);
+    -webkit-transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    transform-origin: 0 0;
+    margin-left: .3em; /* Keep existing margin for spacing */
+    margin-top: 1.5em;
+}
+
+.header .logo span {
+    color: #999
+}
+
+.header .btn {
+    font-family: 'Bebas Neue',Arial,Helvetica,sans-serif;
+    font-size: 20px;
+    padding: 5px 10px 4px;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.header .btn-cta {
+    background: #e87d4f;
+    background: -webkit-linear-gradient(top,#e87d4f 0%,#de6844 19%,#d34c36 39%,#d04832 45%,#b4030d 100%);
+    background: linear-gradient(to bottom,#e87d4f 0%,#de6844 19%,#d34c36 39%,#d04832 45%,#b4030d 100%);
+    color: #fff;
+    text-shadow: -1px -1px 1px #b5050e
+}
+
+.header .container-simple a.btn.btn-cta:hover,
+
+.header .container-simple a.btn.btn-cta:focus,
+
+.header .container-simple a.btn.btn-cta.focus {
+
+  background: linear-gradient(to top,#d86d3f 0%,#c85c34 19%,#c33c26 39%,#c03822 45%,#a4020d 100%); /* Flipped gradient for hover */
+
+}
+
+:root {
+
+            --bg-100: #192230 ; /* Example value, replace with your actual color */
+            --text-100: #99A3AF; /* Example value, replace with your actual color */
+            --font-ui: system-ui, sans-serif;
+          }
+
+          /* Apply the styles directly to the body */
+          body {
+            background-color: var(--bg-100);
+            color: var(--text-100);
+            font-family: var(--font-ui);
+            min-height: 100vh;
+            pointer-events: auto;
+          }
+/* Basic styles for the button for visibility and general layout */
+
+
+/* The .pull-right class is effectively handled by the parent .header's flexbox */
+.header .container-simple {
+    padding-right: 10px; /* Example: Add some padding to the right edge of the header */
+    padding: 0 10px
+}
+@keyframes spin-counter-clockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+        </style>    
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>v65</title>
+    <script type="module" crossorigin src="/assets/index-DA6c1mRL.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CYDLaPE5.css">
+  </head>
+  <body class="bg-bg-100 text-text-100 font-ui min-h-screen">
+<div class="header">
+    <a class="logo" href="https://web.archive.org/web/20170516072653/http://marinaratimer.com/" runat="server">
+      MarinaraTimer&nbsp;<span>by</span>
+    </a>
+
+    <div class="container-simple">
+        <a class="btn btn-cta pull-right" href="https://web.archive.org/web/20170516072653/http://marinaratimer.com/Random">New Timer</a>
+    </div>    
+</div>    
+    <div id="root"></div>
+  </body>
+</html>
